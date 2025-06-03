@@ -247,6 +247,22 @@ def rank(name: str) -> int | list[int]:
     result = np.linalg.matrix_rank(tensor_store[name])
     return result
 
+# @mcp.tool()
+# def matrix_multiplication(name_1: str, name_2: str) -> np.ndarray:
+
+
+@mcp.tool()
+def eigen(name: str) -> dict:
+    if name not in tensor_store:
+        raise ValueError("The tensor name is not found in the store.")
+
+    try:
+        eigenvalues, eigenvectors = np.linalg.eig(tensor_store[name])
+    except ValueError as e:
+        raise ValueError(f"Error computing eigenvalues and eigenvectors: {e}")
+
+    return {"eigenvalues": eigenvalues, "eigenvectors": eigenvectors}
+
 
 if __name__ == '__main__':
-    mcp.run()
+    mcp.run(transport="sse")
