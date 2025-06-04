@@ -1,6 +1,9 @@
-protocol: stdio
+protocol: http
 startCommand:
-  type: "stdio"
-  command: "python"
+  type: http
+  command: python
   args:
-    - "main.py"
+    - main.py
+  # Optionally specify host and port here if needed:
+  # host: 0.0.0.0
+  # port: 8080
