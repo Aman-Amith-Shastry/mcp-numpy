@@ -7,7 +7,7 @@ startCommand:
       apiKey:
         type: "string"
         description: "Your API key"
-    required: ["apiKey"]
+    required: []
 build:
   dockerfile: "Dockerfile"
   dockerBuildPath: "."
