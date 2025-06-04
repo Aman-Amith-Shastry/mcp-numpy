@@ -1,13 +1,4 @@
-runtime: "container"
 startCommand:
-  type: "http"
+  type: "stdio"
   configSchema:
-    type: "object"
-    properties:
-      apiKey:
-        type: "string"
-        description: "Your API key"
-    required: ["apiKey"]
-build:
-  dockerfile: "Dockerfile"
-  dockerBuildPath: "."
+    {}
