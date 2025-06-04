@@ -1,31 +1,4 @@
-# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
-
-name: "@Aman-Amith-Shastry/mcp-numpy"
-description: "An MCP server providing NumPy computation tools over HTTP."
-author: "Aman Shastry"
-version: "0.1.0"
-entrypoint: "python main.py"
-port: 8080
-tags:
-  - numpy
-  - math
-  - computation
-  - python
-serverType: remote
-protocol: http
-docs: "https://github.com/Aman-Amith-Shastry/mcp-numpy"  # Link to your repo or docs
-
-# Optional: If you want to provide a logo
-# logo: "https://raw.githubusercontent.com/your-github/numpy-server/main/logo.png"
-
-# Optional: If you want to define tool schemas, add them here
-# tools:
-#   - name: add
-#     description: "Add two arrays"
-#     inputSchema: ...
-#     outputSchema: ...
-
-# No startCommand needed for remote servers
+protocol: stdio
 startCommand:
   type: "stdio"
   command: "python"
