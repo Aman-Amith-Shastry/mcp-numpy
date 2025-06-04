@@ -45,15 +45,15 @@ def view_tensor(name: str) -> dict:
     return tensor_store[name]
 
 
-@mcp.tool()
-def get_tensors() -> dict:
+@mcp.resource("data://tensor_store")
+def list_tensor_names() -> str:
     """
-    Returns the current state of the in-memory tensor store.
+    Lists the names of all tensors currently stored in the tensor store.
 
     Returns:
-        dict: A dictionary containing all stored tensors with their names as keys and NumPy arrays as values.
+        str: A newline-separated list of tensor names.
     """
-    return tensor_store
+    return "\n".join(tensor_store.keys())
 
 
 @mcp.tool()
@@ -124,6 +124,58 @@ def subtract_tensors(name_a: str, name_b: str) -> np.ndarray:
 
     try:
         result = np.subtract(tensor_store[name_a], tensor_store[name_b])
+    except ValueError as e:
+        raise ValueError(f"Error subtracting tensors: {e}")
+
+    return result
+
+
+@mcp.tool()
+def matrix_multiplication(name_a: str, name_b: str) -> np.ndarray:
+    """
+    Performs matrix multiplication on two stored tensors.
+
+    Args:
+        name_a (str): The name of the first tensor.
+        name_b (str): The name of the second tensor.
+
+    Returns:
+        np.ndarray: The result of matrix multiplication.
+
+    Raises:
+        ValueError: If the tensor names are not found or the shapes are incompatible.
+    """
+    if name_a not in tensor_store or name_b not in tensor_store:
+        raise ValueError("One or both tensor names not found in the store.")
+
+    try:
+        result = np.matmul(tensor_store[name_a], tensor_store[name_b])
+    except ValueError as e:
+        raise ValueError(f"Error subtracting tensors: {e}")
+
+    return result
+
+
+@mcp.tool()
+def tensor_dot(name_a: str, name_b: str) -> np.ndarray:
+    """
+    Computes the tensor dot product of two stored tensors.
+
+    Args:
+        name_a (str): The name of the first tensor.
+        name_b (str): The name of the second tensor.
+
+    Returns:
+        np.ndarray: The result of the tensor dot product.
+
+    Raises:
+        ValueError: If the tensor names are not found or the shapes are incompatible.
+    """
+    if name_a not in tensor_store or name_b not in tensor_store:
+        raise ValueError("One or both tensor names not found in the store.")
+
+    try:
+        result = np.tensordot(tensor_store[name_a], tensor_store[name_b])
     except ValueError as e:
         raise ValueError(f"Error subtracting tensors: {e}")
 
@@ -247,12 +299,21 @@ def rank(name: str) -> int | list[int]:
     result = np.linalg.matrix_rank(tensor_store[name])
     return result
 
-# @mcp.tool()
-# def matrix_multiplication(name_1: str, name_2: str) -> np.ndarray:
-
 
 @mcp.tool()
 def eigen(name: str) -> dict:
+    """
+    Computes the eigenvalues and eigenvectors of a stored square matrix.
+
+    Args:
+        name (str): The name of the tensor to analyze.
+
+    Returns:
+        dict: A dictionary containing eigenvalues and eigenvectors.
+
+    Raises:
+        ValueError: If the tensor is not found or is not a square matrix.
+    """
     if name not in tensor_store:
         raise ValueError("The tensor name is not found in the store.")
 
@@ -265,4 +326,4 @@ def eigen(name: str) -> dict:
 
 
 if __name__ == '__main__':
-    mcp.run(transport="sse")
+    mcp.run()
