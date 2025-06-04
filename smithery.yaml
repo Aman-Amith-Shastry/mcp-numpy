@@ -2,7 +2,7 @@
 
 name: "@Aman-Amith-Shastry/mcp-numpy"
 description: "An MCP server providing NumPy computation tools over HTTP."
-author: "Your Name <your@email.com>"
+author: "Aman Shastry"
 version: "0.1.0"
 entrypoint: "python server.py --host 0.0.0.0 --port 8080"
 port: 8080
