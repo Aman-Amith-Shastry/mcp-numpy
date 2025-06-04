@@ -1,17 +1,15 @@
-# Use an official Python runtime as a parent image
 FROM python:3.11-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container
-COPY . .
+# Install MCP server package and numpy
+RUN pip install --no-cache-dir mcp-numpy -r requirements.txt
 
-# Install any dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# (Optional) If you have custom code, copy it in:
+# COPY . .
 
-# Expose the port that your application will run on
-EXPOSE 8000
+# Expose the port (replace 8080 with your server’s port if different)
+EXPOSE 8080
 
-# Specify the command to run on container start
-CMD ["python", "main.py"]
+# Start the MCP server (replace with the actual command if different)
+CMD ["mcp-numpy", "--host", "0.0.0.0", "--port", "8080"]
