@@ -26,3 +26,8 @@ docs: "https://github.com/Aman-Amith-Shastry/mcp-numpy"  # Link to your repo or 
 #     outputSchema: ...
 
 # No startCommand needed for remote servers
+startCommand:
+  type: "stdio"
+  command: "python"
+  args:
+    - "main.py"
