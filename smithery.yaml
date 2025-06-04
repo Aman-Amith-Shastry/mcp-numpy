@@ -4,7 +4,7 @@ name: "@Aman-Amith-Shastry/mcp-numpy"
 description: "An MCP server providing NumPy computation tools over HTTP."
 author: "Aman Shastry"
 version: "0.1.0"
-entrypoint: "python server.py --host 0.0.0.0 --port 8080"
+entrypoint: "python main.py"
 port: 8080
 tags:
   - numpy
