@@ -1,4 +1,13 @@
-version: 1
-start:
-  command: ["python", "main.py"]
-  port: 8000
+runtime: "container"
+startCommand:
+  type: "http"
+  configSchema:
+    type: "object"
+    properties:
+      apiKey:
+        type: "string"
+        description: "Your API key"
+    required: ["apiKey"]
+build:
+  dockerfile: "Dockerfile"
+  dockerBuildPath: "."
