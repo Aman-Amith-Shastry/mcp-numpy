@@ -1,15 +1,16 @@
 FROM python:3.11-slim
 
+# Set working directory
 WORKDIR /app
 
-# Install MCP server package and numpy
-RUN pip install --no-cache-dir numpy mcp
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# (Optional) If you have custom code, copy it in:
-# COPY . .
+# Copy your source code
+COPY . .
 
-# Expose the port (replace 8080 with your server’s port if different)
-EXPOSE 8080
+# STDIO does not expose any ports, so no EXPOSE needed
 
-# Start the MCP server (replace with the actual command if different)
-CMD ["mcp-numpy", "--host", "0.0.0.0", "--port", "8080"]
+# Run the MCP server using STDIO transport
+CMD ["python", "main.py"]
