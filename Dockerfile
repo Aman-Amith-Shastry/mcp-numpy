@@ -3,7 +3,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Install MCP server package and numpy
-RUN pip install --no-cache-dir mcp-numpy numpy mcp
+RUN pip install --no-cache-dir numpy mcp
 
 # (Optional) If you have custom code, copy it in:
 # COPY . .
