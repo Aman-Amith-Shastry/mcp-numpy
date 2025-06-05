@@ -6,8 +6,5 @@ startCommand:
     - main.py
   configSchema:
     type: object
-    properties:
-      apiKey:
-        type: string
-        description: Your API key
+    properties: {}
     required: []
