@@ -4,6 +4,10 @@ startCommand:
   command: python
   args:
     - main.py
-  # Optionally specify host and port here if needed:
-  # host: 0.0.0.0
-  # port: 8080
+  configSchema:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: Your API key
+    required: []
