@@ -1,10 +1,13 @@
-protocol: http
+runtime: container
+build:
+  dockerfile: Dockerfile
+  dockerBuildPath: .
 startCommand:
   type: http
-  command: python
-  args:
-    - main.py
   configSchema:
     type: object
-    properties: {}
+    properties:
+      apiKey:
+        type: string
+        description: Your API key
     required: []
